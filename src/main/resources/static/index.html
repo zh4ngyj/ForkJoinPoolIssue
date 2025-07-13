@@ -429,8 +429,9 @@
                 statusDiv.style.marginBottom = '15px';
 
                 if (pool.status === "UP") {
-                    statusDiv.className = 'success';
-                    statusDiv.innerHTML = `
+                    if (pool.name === "Tomcat") {
+                        statusDiv.className = 'success';
+                        statusDiv.innerHTML = `
                     <strong>${pool.name}</strong><br>
                     状态: ${pool.status}<br>
                     当前活跃线程数: ${pool.activeThreads}<br>
@@ -440,6 +441,21 @@
                     队列任务数: ${pool.queueSize}<br>
                     使用率: ${pool.usagePercentage}<br><br>
                 `;
+                    } else {
+                        statusDiv.className = 'success';
+                        statusDiv.innerHTML = `
+                    <strong>${pool.name}</strong><br>
+                    状态: ${pool.status}<br>
+                    并行度: ${pool.parallelism}<br>
+                    正在运行的工作线程数: ${pool.runningThreads}<br>
+                    当前活跃线程数: ${pool.activeThreads}<br>
+                    当前线程池中的总线程数: ${pool.poolSize}<br>
+                    队列任务数: ${pool.queuedTasks}<br>
+                    工作窃取次数: ${pool.stealCount}<br>
+                    使用率: ${pool.usagePercentage}<br><br>
+                `;
+                    }
+
                 } else {
                     statusDiv.className = 'error';
                     statusDiv.innerHTML = `<strong>${pool.name}:</strong> 服务不可用: ${pool.error || '未知错误'}`;
