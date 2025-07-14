@@ -39,6 +39,8 @@ public class TaskService {
 
     // 问题方法：使用阻塞调用
     public String runBlockingTasks() {
+        long startTime = System.currentTimeMillis();
+
         List<CompletableFuture<Void>> futures = new ArrayList<>();
 
         // 创建5个任务（超过线程池大小）
@@ -55,6 +57,10 @@ public class TaskService {
         try {
             CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
                     .get(30, TimeUnit.SECONDS); // 超时设置为30秒
+
+            long endTime = System.currentTimeMillis();
+            System.out.println("耗时：" + (endTime-startTime)/1000);
+
             return "所有任务已完成";
         } catch (Exception e) {
             return "任务执行失败: " + e.getMessage();
