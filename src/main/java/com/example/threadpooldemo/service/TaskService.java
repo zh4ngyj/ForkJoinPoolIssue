@@ -28,8 +28,7 @@ public class TaskService {
     @Autowired
     public TaskService(
             @Qualifier("problemPool") ExecutorService problemPool,
-            @Qualifier("optimizedPool") ThreadPoolTaskExecutor optimizedPool,
-            ServletWebServerApplicationContext applicationContext) {
+            @Qualifier("optimizedPool") ThreadPoolTaskExecutor optimizedPool) {
         this.problemPool = problemPool;
         this.optimizedPool = optimizedPool;
     }
