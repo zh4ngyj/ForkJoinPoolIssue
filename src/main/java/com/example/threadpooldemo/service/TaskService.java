@@ -25,8 +25,6 @@ public class TaskService {
 
     private final ThreadPoolTaskExecutor optimizedPool;
 
-    private final ServletWebServerApplicationContext applicationContext;
-
     @Autowired
     public TaskService(
             @Qualifier("problemPool") ExecutorService problemPool,
@@ -34,7 +32,6 @@ public class TaskService {
             ServletWebServerApplicationContext applicationContext) {
         this.problemPool = problemPool;
         this.optimizedPool = optimizedPool;
-        this.applicationContext = applicationContext;
     }
 
     // 问题方法：使用阻塞调用
